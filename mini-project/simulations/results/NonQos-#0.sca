@@ -1,8 +1,8 @@
 version 3
-run NonQos-0-20250402-14:32:18-15132
+run NonQos-0-20250408-17:41:44-15576
 attr configname NonQos
-attr datetime 20250402-14:32:18
-attr datetimef 20250402-143218
+attr datetime 20250408-17:41:44
+attr datetimef 20250408-174144
 attr experiment NonQos
 attr inifile omnetpp.ini
 attr iterationvars ""
@@ -10,7 +10,7 @@ attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
 attr network QosShowcase
-attr processid 15132
+attr processid 15576
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -18,13 +18,14 @@ attr runnumber 0
 attr seedset 0
 config image-path ../../inet-master/images
 config network QosShowcase
-config sim-time-limit 10s
+config sim-time-limit 100s
+config *.wlan[*].mac.typename Ieee80211eMac
 config *.*.wlan[*].bitrate 54Mbps
 config *.client.numApps 4
 config *.client.app[*].typename UdpBasicApp
 config *.client.app[*].destAddresses "\"server\""
 config *.client.app[*].startTime 1.0s+this.sendInterval*index/4
-config *.client.app[*].stopTime 6.0s
+config *.client.app[*].stopTime 100.0s
 config *.client.app[0].destPort 21
 config *.client.app[1].destPort 80
 config *.client.app[2].destPort 4000
@@ -151,42 +152,42 @@ attr unit b
 par QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue dropperClass "\"inet::queueing::PacketAtCollectionEndDropper\""
 par QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue comparatorClass "\"inet::ieee80211::MgmtOverDataComparator\""
 par QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue bufferModule "\"\""
-scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:last 7
+scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:last 17
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode last
 attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
 attr title "queue length, last"
 attr unit pk
-scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:max 11
+scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:max 19
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode max
 attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
 attr title "queue length, max"
 attr unit pk
-scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:timeavg 0.13220188221825
+scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:timeavg 1.6614831981688
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode timeavg
 attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
 attr title "queue length, timeavg"
 attr unit pk
-scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue queueBitLength:last 53984
+scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue queueBitLength:last 131104
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode last
 attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
 attr title "queue bit length, last"
 attr unit b
-scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue queueBitLength:max 80032
+scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue queueBitLength:max 146528
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode max
 attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
 attr title "queue bit length, max"
 attr unit b
-scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue queueBitLength:timeavg 951.7725795699
+scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue queueBitLength:timeavg 12449.161809718
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode timeavg
@@ -194,20 +195,20 @@ attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetP
 attr title "queue bit length, timeavg"
 attr unit b
 statistic QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue queueingTime:histogram
-field count 67
-field mean 0.7471807906304
-field stddev 0.45629381946687
+field count 304
+field mean 1.0483258085986
+field stddev 0.29453094176478
 field min 0
-field max 1.043645975243
-field sum 50.061112972237
-field sqrsum 51.146169249556
+field max 1.252922785437
+field sum 318.69104581398
+field sqrsum 360.3768364201
 attr interpolationmode none
 attr recordingmode histogram
 attr source queueingTime(packetPulled)
 attr title "queueing times"
 attr unit s
 bin	-inf	0
-bin	0	18
+bin	0	21
 bin	0.02	0
 bin	0.04	0
 bin	0.06	0
@@ -259,40 +260,53 @@ bin	0.96	0
 bin	0.98	0
 bin	1	24
 bin	1.02	21
-bin	1.04	4
-bin	1.06	0
-bin	1.08	0
-bin	1.1	0
-bin	1.12	0
-bin	1.14	0
-bin	1.16	0
-bin	1.18	0
-bin	1.2	0
-bin	1.22	0
-bin	1.24	0
+bin	1.04	24
+bin	1.06	20
+bin	1.08	25
+bin	1.1	19
+bin	1.12	21
+bin	1.14	25
+bin	1.16	23
+bin	1.18	23
+bin	1.2	24
+bin	1.22	20
+bin	1.24	14
 bin	1.26	0
 bin	1.28	0
 bin	1.3	0
 bin	1.32	0
-scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingPackets:count 67
+bin	1.34	0
+bin	1.36	0
+bin	1.38	0
+bin	1.4	0
+bin	1.42	0
+bin	1.44	0
+bin	1.46	0
+bin	1.48	0
+bin	1.5	0
+bin	1.52	0
+bin	1.54	0
+bin	1.56	0
+bin	1.58	0
+scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingPackets:count 304
 attr recordingmode count
 attr source packetPulled
 attr title "outgoing packets, count"
 attr unit pk
-scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingPacketLengths:sum 356256
+scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingPacketLengths:sum 2105208
 attr interpolationmode none
 attr recordingmode sum
 attr source packetLength(packetPulled)
 attr title "outgoing packet lengths, sum"
 attr unit b
 statistic QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingPacketLengths:histogram
-field count 67
-field mean 5317.2537313433
-field stddev 3295.8874803503
+field count 304
+field mean 6925.0263157895
+field stddev 2054.2827000796
 field min 272
 field max 7712
-field sum 356256
-field sqrsum 2611253248
+field sum 2105208
+field sqrsum 15857304256
 attr interpolationmode none
 attr recordingmode histogram
 attr source packetLength(packetPulled)
@@ -301,12 +315,12 @@ attr unit b
 bin	-inf	0
 bin	0	0
 bin	200	6
-bin	400	14
+bin	400	17
 bin	600	0
 bin	800	0
 bin	1000	0
 bin	1200	0
-bin	1400	0
+bin	1400	3
 bin	1600	0
 bin	1800	0
 bin	2000	0
@@ -325,7 +339,7 @@ bin	4400	0
 bin	4600	0
 bin	4800	0
 bin	5000	0
-bin	5200	6
+bin	5200	22
 bin	5400	0
 bin	5600	0
 bin	5800	0
@@ -337,7 +351,7 @@ bin	6800	0
 bin	7000	0
 bin	7200	0
 bin	7400	0
-bin	7600	41
+bin	7600	256
 bin	7800	0
 bin	8000	0
 bin	8200	0
@@ -364,25 +378,25 @@ attr unit s
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue incomingPackets:count 74
+scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue incomingPackets:count 321
 attr recordingmode count
 attr source packetPushStarted
 attr title "incoming packets, count"
 attr unit pk
-scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue incomingPacketLengths:sum 410240
+scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue incomingPacketLengths:sum 2236312
 attr interpolationmode none
 attr recordingmode sum
 attr source packetLength(packetPushStarted)
 attr title "incoming packet lengths, sum"
 attr unit b
 statistic QosShowcase.ap.wlan[0].mac.dcf.channelAccess.pendingQueue incomingPacketLengths:histogram
-field count 74
-field mean 5543.7837837838
-field stddev 3212.3392162537
+field count 321
+field mean 6966.7040498442
+field stddev 2006.7498885673
 field min 272
 field max 7712
-field sum 410240
-field sqrsum 3027577856
+field sum 2236312
+field sqrsum 16868378304
 attr interpolationmode none
 attr recordingmode histogram
 attr source packetLength(packetPushStarted)
@@ -391,12 +405,12 @@ attr unit b
 bin	-inf	0
 bin	0	0
 bin	200	6
-bin	400	14
+bin	400	17
 bin	600	0
 bin	800	0
 bin	1000	0
 bin	1200	0
-bin	1400	0
+bin	1400	3
 bin	1600	0
 bin	1800	0
 bin	2000	0
@@ -415,7 +429,7 @@ bin	4400	0
 bin	4600	0
 bin	4800	0
 bin	5000	0
-bin	5200	6
+bin	5200	22
 bin	5400	0
 bin	5600	0
 bin	5800	0
@@ -427,7 +441,7 @@ bin	6800	0
 bin	7000	0
 bin	7200	0
 bin	7400	0
-bin	7600	48
+bin	7600	273
 bin	7800	0
 bin	8000	0
 bin	8200	0
@@ -455,13 +469,13 @@ par QosShowcase.ap.wlan[0].mac.dcf.channelAccess.inProgressFrames pendingQueueMo
 par QosShowcase.ap.wlan[0].mac.dcf.channelAccess.inProgressFrames originatorMacDataServiceModule "\"^.^.originatorMacDataService\""
 par QosShowcase.ap.wlan[0].mac.dcf.channelAccess.inProgressFrames ackHandlerModule "\"^.^.ackHandler\""
 statistic QosShowcase.ap.wlan[0].mac.dcf.channelAccess.inProgressFrames queueingTime:histogram
-field count 65
-field mean 0.00062682677424615
-field stddev 0.0006864553994601
+field count 302
+field mean 0.0010387606009205
+field stddev 0.00064134507863564
 field min 3.8e-05
-field max 0.003304051566
-field sum 0.040743740326
-field sqrsum 5.5697412307936e-05
+field max 0.003828051566
+field sum 0.313705701478
+field sqrsum 0.00044967349945642
 attr interpolationmode none
 attr recordingmode histogram
 attr source queueingTime(packetDequeued)
@@ -474,76 +488,76 @@ bin	0.00015	2
 bin	0.0002	9
 bin	0.00025	0
 bin	0.0003	0
-bin	0.00035	0
-bin	0.0004	2
-bin	0.00045	3
-bin	0.0005	2
-bin	0.00055	4
-bin	0.0006	0
-bin	0.00065	1
-bin	0.0007	0
-bin	0.00075	1
-bin	0.0008	0
-bin	0.00085	4
-bin	0.0009	1
-bin	0.00095	0
-bin	0.001	1
-bin	0.00105	1
-bin	0.0011	1
-bin	0.00115	0
-bin	0.0012	0
-bin	0.00125	4
-bin	0.0013	1
-bin	0.00135	1
-bin	0.0014	1
-bin	0.00145	0
-bin	0.0015	2
-bin	0.00155	0
-bin	0.0016	0
+bin	0.00035	1
+bin	0.0004	4
+bin	0.00045	13
+bin	0.0005	12
+bin	0.00055	19
+bin	0.0006	6
+bin	0.00065	10
+bin	0.0007	6
+bin	0.00075	8
+bin	0.0008	7
+bin	0.00085	15
+bin	0.0009	6
+bin	0.00095	8
+bin	0.001	18
+bin	0.00105	9
+bin	0.0011	16
+bin	0.00115	8
+bin	0.0012	14
+bin	0.00125	15
+bin	0.0013	11
+bin	0.00135	7
+bin	0.0014	8
+bin	0.00145	5
+bin	0.0015	9
+bin	0.00155	4
+bin	0.0016	5
 bin	0.00165	0
-bin	0.0017	0
-bin	0.00175	0
-bin	0.0018	0
-bin	0.00185	0
+bin	0.0017	1
+bin	0.00175	1
+bin	0.0018	2
+bin	0.00185	2
 bin	0.0019	0
 bin	0.00195	2
-bin	0.002	0
-bin	0.00205	0
-bin	0.0021	0
-bin	0.00215	0
+bin	0.002	1
+bin	0.00205	1
+bin	0.0021	1
+bin	0.00215	1
 bin	0.0022	0
 bin	0.00225	0
 bin	0.0023	0
-bin	0.00235	0
-bin	0.0024	0
+bin	0.00235	1
+bin	0.0024	1
 bin	0.00245	0
 bin	0.0025	0
-bin	0.00255	0
-bin	0.0026	0
+bin	0.00255	1
+bin	0.0026	1
 bin	0.00265	0
 bin	0.0027	0
-bin	0.00275	0
+bin	0.00275	2
 bin	0.0028	1
-bin	0.00285	0
+bin	0.00285	1
 bin	0.0029	0
-bin	0.00295	0
+bin	0.00295	1
 bin	0.003	0
-bin	0.00305	0
+bin	0.00305	1
 bin	0.0031	0
 bin	0.00315	0
 bin	0.0032	0
 bin	0.00325	0
 bin	0.0033	1
-bin	0.00335	0
-bin	0.0034	0
+bin	0.00335	1
+bin	0.0034	1
 bin	0.00345	0
 bin	0.0035	0
-bin	0.00355	0
+bin	0.00355	1
 bin	0.0036	0
 bin	0.00365	0
 bin	0.0037	0
 bin	0.00375	0
-bin	0.0038	0
+bin	0.0038	1
 bin	0.00385	0
 bin	0.0039	0
 bin	0.00395	0
@@ -557,7 +571,7 @@ attr interpolationmode sample-hold
 attr recordingmode max
 attr source "warmup(count(packetEnqueued) - count(packetDequeued))"
 attr title "queue length, max"
-scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:timeavg 0.04018265387351
+scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:timeavg 0.25085248030149
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode timeavg
@@ -566,10 +580,10 @@ attr title "queue length, timeavg"
 par QosShowcase.ap.wlan[0].mac.dcf.channelAccess.contention typename "\"inet.linklayer.ieee80211.mac.contention.Contention\""
 par QosShowcase.ap.wlan[0].mac.dcf.channelAccess.contention initialChannelBusy true
 par QosShowcase.ap.wlan[0].mac.dcf.channelAccess.contention backoffOptimization true
-scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.contention channelAccessGranted:count 67
+scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.contention channelAccessGranted:count 314
 attr recordingmode count
 attr title "channel access granted, count"
-scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.contention stateChanged:count 1040
+scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess.contention stateChanged:count 4968
 attr enum IDLE,DEFER,IFS_AND_BACKOFF
 attr interpolationmode none
 attr recordingmode count
@@ -580,7 +594,7 @@ par QosShowcase.ap.wlan[0].mac.dcf.channelAccess difsn -1
 par QosShowcase.ap.wlan[0].mac.dcf.channelAccess cwMin -1
 par QosShowcase.ap.wlan[0].mac.dcf.channelAccess cwMax -1
 par QosShowcase.ap.wlan[0].mac.dcf.channelAccess rxModule "\"^.^.rx\""
-scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess channelOwnershipChanged:count 133
+scalar QosShowcase.ap.wlan[0].mac.dcf.channelAccess channelOwnershipChanged:count 627
 attr interpolationmode sample-hold
 attr recordingmode count
 attr title "channel ownership, count"
@@ -608,7 +622,7 @@ attr title "packet drops: duplicate detected, sum(packetBytes)"
 scalar QosShowcase.ap.wlan[0].mac.dcf.recipientMacDataService packetDeaggregated:count 0
 attr recordingmode count
 attr title "packets deaggregated, count"
-scalar QosShowcase.ap.wlan[0].mac.dcf.recipientMacDataService packetDefragmented:count 64
+scalar QosShowcase.ap.wlan[0].mac.dcf.recipientMacDataService packetDefragmented:count 308
 attr recordingmode count
 attr title "packets defragmented, count"
 par QosShowcase.ap.wlan[0].mac.dcf.rateSelection typename "\"inet.linklayer.ieee80211.mac.rateselection.RateSelection\""
@@ -657,20 +671,20 @@ par QosShowcase.ap.wlan[0].mac.dcf.ctsPolicy rateSelectionModule "\"^.rateSelect
 par QosShowcase.ap.wlan[0].mac.dcf typename "\"inet.linklayer.ieee80211.mac.coordinationfunction.Dcf\""
 par QosShowcase.ap.wlan[0].mac.dcf rxModule "\"^.rx\""
 par QosShowcase.ap.wlan[0].mac.dcf txModule "\"^.tx\""
-scalar QosShowcase.ap.wlan[0].mac.dcf packetReceivedFromPeer:count 118
+scalar QosShowcase.ap.wlan[0].mac.dcf packetReceivedFromPeer:count 596
 attr interpolationmode none
 attr recordingmode count
 attr title "packets received, count"
-scalar QosShowcase.ap.wlan[0].mac.dcf packetReceivedFromPeer:sum(packetBytes) 51428
+scalar QosShowcase.ap.wlan[0].mac.dcf packetReceivedFromPeer:sum(packetBytes) 282795
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr title "packets received, sum(packetBytes)"
-scalar QosShowcase.ap.wlan[0].mac.dcf packetReceivedFromPeerUnicast:count 116
+scalar QosShowcase.ap.wlan[0].mac.dcf packetReceivedFromPeerUnicast:count 594
 attr interpolationmode none
 attr recordingmode count
 attr source ieee80211Unicast(packetReceivedFromPeer)
 attr title "packets received: unicast, count"
-scalar QosShowcase.ap.wlan[0].mac.dcf packetReceivedFromPeerUnicast:sum(packetBytes) 51348
+scalar QosShowcase.ap.wlan[0].mac.dcf packetReceivedFromPeerUnicast:sum(packetBytes) 282715
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211Unicast(packetReceivedFromPeer)
@@ -695,80 +709,80 @@ attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211Broadcast(packetReceivedFromPeer)
 attr title "packets received: broadcast, sum(packetBytes)"
-scalar QosShowcase.ap.wlan[0].mac.dcf packetReceivedFromPeerWithRetry:count 1
+scalar QosShowcase.ap.wlan[0].mac.dcf packetReceivedFromPeerWithRetry:count 10
 attr interpolationmode none
 attr recordingmode count
 attr source ieee80211Retry(packetReceivedFromPeer)
 attr title "packets received: with retry, count"
-scalar QosShowcase.ap.wlan[0].mac.dcf packetReceivedFromPeerWithRetry:sum(packetBytes) 964
+scalar QosShowcase.ap.wlan[0].mac.dcf packetReceivedFromPeerWithRetry:sum(packetBytes) 8865
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211Retry(packetReceivedFromPeer)
 attr title "packets received: with retry, sum(packetBytes)"
-scalar QosShowcase.ap.wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:count 117
+scalar QosShowcase.ap.wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:count 586
 attr interpolationmode none
 attr recordingmode count
 attr source ieee80211NotRetry(packetReceivedFromPeer)
 attr title "packets received: without retry, count"
-scalar QosShowcase.ap.wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:sum(packetBytes) 50464
+scalar QosShowcase.ap.wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:sum(packetBytes) 273930
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211NotRetry(packetReceivedFromPeer)
 attr title "packets received: without retry, sum(packetBytes)"
-scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeer:count 128
+scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeer:count 619
 attr interpolationmode none
 attr recordingmode count
 attr title "packets sent, count"
-scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeer:sum(packetBytes) 44736
+scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeer:sum(packetBytes) 275036
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr title "packets sent, sum(packetBytes)"
-scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeerUnicast:count 117
+scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeerUnicast:count 605
 attr interpolationmode none
 attr recordingmode count
 attr source ieee80211Unicast(packetSentToPeer)
 attr title "packets sent: unicast, count"
-scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeerUnicast:sum(packetBytes) 44112
+scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeerUnicast:sum(packetBytes) 274244
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211Unicast(packetSentToPeer)
 attr title "packets sent: unicast, sum(packetBytes)"
-scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeerMulticast:count 11
+scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeerMulticast:count 14
 attr interpolationmode none
 attr recordingmode count
 attr source ieee80211Multicast(packetSentToPeer)
 attr title "packets sent: multicast, count"
-scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeerMulticast:sum(packetBytes) 624
+scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeerMulticast:sum(packetBytes) 792
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211Multicast(packetSentToPeer)
 attr title "packets sent: multicast, sum(packetBytes)"
-scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeerBroadcast:count 11
+scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeerBroadcast:count 14
 attr interpolationmode none
 attr recordingmode count
 attr source ieee80211Broadcast(packetSentToPeer)
 attr title "packets sent: broadcast , count"
-scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeerBroadcast:sum(packetBytes) 624
+scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeerBroadcast:sum(packetBytes) 792
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211Broadcast(packetSentToPeer)
 attr title "packets sent: broadcast , sum(packetBytes)"
-scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeerWithRetry:count 2
+scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeerWithRetry:count 21
 attr interpolationmode none
 attr recordingmode count
 attr source ieee80211Retry(packetSentToPeer)
 attr title "packets sent: with retry, count"
-scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeerWithRetry:sum(packetBytes) 1928
+scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeerWithRetry:sum(packetBytes) 18394
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211Retry(packetSentToPeer)
 attr title "packets sent: with retry, sum(packetBytes)"
-scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeerWithoutRetry:count 126
+scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeerWithoutRetry:count 598
 attr interpolationmode none
 attr recordingmode count
 attr source ieee80211NotRetry(packetSentToPeer)
 attr title "packets sent: without retry, count"
-scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeerWithoutRetry:sum(packetBytes) 42808
+scalar QosShowcase.ap.wlan[0].mac.dcf packetSentToPeerWithoutRetry:sum(packetBytes) 256642
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211NotRetry(packetSentToPeer)
@@ -817,17 +831,17 @@ scalar QosShowcase.ap.wlan[0].mac.dcf linkBroken:count 0
 attr interpolationmode none
 attr recordingmode count
 attr title "link breaks, count"
-scalar QosShowcase.ap.wlan[0].mac.dcf frameSequenceFinished:count 66
+scalar QosShowcase.ap.wlan[0].mac.dcf frameSequenceFinished:count 313
 attr recordingmode count
 attr title "finished frame sequences, count"
 statistic QosShowcase.ap.wlan[0].mac.dcf frameSequenceDuration:histogram
-field count 66
-field mean 0.00016609010527273
-field stddev 6.9666251142262e-05
+field count 313
+field mean 0.00019938248260703
+field stddev 4.2581796815719e-05
 field min 3.8e-05
 field max 0.000225
-field sum 0.010961946948
-field sqrsum 2.1361410482215e-06
+field sum 0.062406717056
+field sqrsum 1.3008527517037e-05
 attr recordingmode histogram
 attr source frameSequenceDuration(frameSequenceFinished)
 attr title "frame sequence durations"
@@ -841,7 +855,7 @@ bin	2.5e-05	0
 bin	3e-05	0
 bin	3.5e-05	1
 bin	4e-05	0
-bin	4.5e-05	10
+bin	4.5e-05	13
 bin	5e-05	0
 bin	5.5e-05	0
 bin	6e-05	0
@@ -852,9 +866,9 @@ bin	8e-05	1
 bin	8.5e-05	6
 bin	9e-05	2
 bin	9.5e-05	0
-bin	0.0001	0
+bin	0.0001	3
 bin	0.000105	0
-bin	0.00011	0
+bin	0.00011	1
 bin	0.000115	0
 bin	0.00012	0
 bin	0.000125	0
@@ -866,17 +880,17 @@ bin	0.00015	0
 bin	0.000155	0
 bin	0.00016	0
 bin	0.000165	0
-bin	0.00017	5
+bin	0.00017	22
 bin	0.000175	0
-bin	0.00018	0
+bin	0.00018	1
 bin	0.000185	0
 bin	0.00019	0
 bin	0.000195	0
 bin	0.0002	0
 bin	0.000205	0
-bin	0.00021	40
+bin	0.00021	254
 bin	0.000215	0
-bin	0.00022	1
+bin	0.00022	9
 bin	0.000225	0
 bin	0.00023	0
 bin	0.000235	0
@@ -889,20 +903,20 @@ bin	0.000265	0
 bin	0.00027	0
 bin	0.000275	0
 statistic QosShowcase.ap.wlan[0].mac.dcf frameSequenceNumPackets:histogram
-field count 66
-field mean 1.8333333333333
-field stddev 0.37553380809941
+field count 313
+field mean 1.9552715654952
+field stddev 0.20703803934002
 field min 1
 field max 2
-field sum 121
-field sqrsum 231
+field sum 612
+field sqrsum 1210
 attr recordingmode histogram
 attr source frameSequenceNumPackets(frameSequenceFinished)
 attr title "frame sequences: number of packets"
 bin	-inf	0
 bin	0	0
-bin	1	11
-bin	2	55
+bin	1	14
+bin	2	299
 bin	3	0
 par QosShowcase.ap.wlan[0].mac.ds typename "\"inet.linklayer.ieee80211.mac.Ds\""
 par QosShowcase.ap.wlan[0].mac.ds mibModule "\"QosShowcase.ap.wlan[0].mib\""
@@ -921,19 +935,19 @@ attr enum off,sleep,receiver,transmitter,transceiver
 par QosShowcase.ap.wlan[0].mac mtu 2304B
 attr unit B
 par QosShowcase.ap.wlan[0].mac qosStation false
-scalar QosShowcase.ap.wlan[0].mac packetReceivedFromLower:count 118
+scalar QosShowcase.ap.wlan[0].mac packetReceivedFromLower:count 596
 attr interpolationmode none
 attr recordingmode count
 attr title "packets received from lower layer, count"
-scalar QosShowcase.ap.wlan[0].mac packetReceivedFromLower:sum(packetBytes) 51428
+scalar QosShowcase.ap.wlan[0].mac packetReceivedFromLower:sum(packetBytes) 282795
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr title "packets received from lower layer, sum(packetBytes)"
-scalar QosShowcase.ap.wlan[0].mac packetSentToLower:count 129
+scalar QosShowcase.ap.wlan[0].mac packetSentToLower:count 620
 attr interpolationmode none
 attr recordingmode count
 attr title "packets sent to lower layer, count"
-scalar QosShowcase.ap.wlan[0].mac packetSentToLower:sum(packetBytes) 45700
+scalar QosShowcase.ap.wlan[0].mac packetSentToLower:sum(packetBytes) 276000
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr title "packets sent to lower layer, sum(packetBytes)"
@@ -1120,13 +1134,13 @@ par QosShowcase.ap.wlan[0].radio channelNumber 0
 par QosShowcase.ap.wlan[0].radio crcMode "\"declared\""
 attr enum declared,computed
 statistic QosShowcase.ap.wlan[0].radio minSnir:histogram
-field count 118
+field count 596
 field mean 9782.8877605193
 field stddev 0
 field min 9782.8877605193
 field max 9782.8877605193
-field sum 1154380.7557413
-field sqrsum 11293177366.32
+field sum 5830601.1052695
+field sqrsum 57040116189.212
 attr recordingmode histogram
 attr source minimumSnir(packetSentToUpper)
 attr title "Min SNIR"
@@ -1156,7 +1170,7 @@ bin	9782.8	0
 bin	9782.82	0
 bin	9782.84	0
 bin	9782.86	0
-bin	9782.88	118
+bin	9782.88	596
 bin	9782.9	0
 bin	9782.92	0
 bin	9782.94	0
@@ -1184,7 +1198,7 @@ bin	9783.36	0
 bin	9783.38	0
 bin	9783.4	0
 statistic QosShowcase.ap.wlan[0].radio packetErrorRate:histogram
-field count 118
+field count 596
 field mean 0
 field stddev 0
 field min 0
@@ -1220,7 +1234,7 @@ bin	-0.08	0
 bin	-0.06	0
 bin	-0.04	0
 bin	-0.02	0
-bin	0	118
+bin	0	596
 bin	0.02	0
 bin	0.04	0
 bin	0.06	0
@@ -1274,21 +1288,21 @@ attr title "Symbol error rate"
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar QosShowcase.ap.wlan[0].radio transmissionState:count 514
+scalar QosShowcase.ap.wlan[0].radio transmissionState:count 2478
 attr enum UNDEFINED,IDLE,TRANSMITTING
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source transmissionStateChanged
 attr title "Radio transmission state, count"
 attr type enum
-scalar QosShowcase.ap.wlan[0].radio receptionState:count 495
+scalar QosShowcase.ap.wlan[0].radio receptionState:count 2441
 attr enum UNDEFINED,IDLE,BUSY,RECEIVING
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source receptionStateChanged
 attr title "Radio reception state, count"
 attr type enum
-scalar QosShowcase.ap.wlan[0].radio radioMode:count 260
+scalar QosShowcase.ap.wlan[0].radio radioMode:count 1242
 attr enum OFF,SLEEP,RECEIVER,TRANSMITTER,TRANSCEIVER,SWITCHING
 attr interpolationmode sample-hold
 attr recordingmode count
@@ -1573,7 +1587,7 @@ attr recordingmode max
 attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
 attr title "queue length, max"
 attr unit pk
-scalar QosShowcase.server.wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:timeavg 0.0015118716277648
+scalar QosShowcase.server.wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:timeavg 0.0012593814682202
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode timeavg
@@ -1594,7 +1608,7 @@ attr recordingmode max
 attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
 attr title "queue bit length, max"
 attr unit b
-scalar QosShowcase.server.wlan[0].mac.dcf.channelAccess.pendingQueue queueBitLength:timeavg 0.57163693788947
+scalar QosShowcase.server.wlan[0].mac.dcf.channelAccess.pendingQueue queueBitLength:timeavg 0.47617069657727
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode timeavg
@@ -2019,7 +2033,7 @@ attr interpolationmode sample-hold
 attr recordingmode max
 attr source "warmup(count(packetEnqueued) - count(packetDequeued))"
 attr title "queue length, max"
-scalar QosShowcase.server.wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:timeavg 0.00036960743696125
+scalar QosShowcase.server.wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:timeavg 0.00030788113757618
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode timeavg
@@ -2031,7 +2045,7 @@ par QosShowcase.server.wlan[0].mac.dcf.channelAccess.contention backoffOptimizat
 scalar QosShowcase.server.wlan[0].mac.dcf.channelAccess.contention channelAccessGranted:count 5
 attr recordingmode count
 attr title "channel access granted, count"
-scalar QosShowcase.server.wlan[0].mac.dcf.channelAccess.contention stateChanged:count 994
+scalar QosShowcase.server.wlan[0].mac.dcf.channelAccess.contention stateChanged:count 4890
 attr enum IDLE,DEFER,IFS_AND_BACKOFF
 attr interpolationmode none
 attr recordingmode count
@@ -2070,7 +2084,7 @@ attr title "packet drops: duplicate detected, sum(packetBytes)"
 scalar QosShowcase.server.wlan[0].mac.dcf.recipientMacDataService packetDeaggregated:count 0
 attr recordingmode count
 attr title "packets deaggregated, count"
-scalar QosShowcase.server.wlan[0].mac.dcf.recipientMacDataService packetDefragmented:count 61
+scalar QosShowcase.server.wlan[0].mac.dcf.recipientMacDataService packetDefragmented:count 298
 attr recordingmode count
 attr title "packets defragmented, count"
 par QosShowcase.server.wlan[0].mac.dcf.rateSelection typename "\"inet.linklayer.ieee80211.mac.rateselection.RateSelection\""
@@ -2119,78 +2133,78 @@ par QosShowcase.server.wlan[0].mac.dcf.ctsPolicy rateSelectionModule "\"^.rateSe
 par QosShowcase.server.wlan[0].mac.dcf typename "\"inet.linklayer.ieee80211.mac.coordinationfunction.Dcf\""
 par QosShowcase.server.wlan[0].mac.dcf rxModule "\"^.rx\""
 par QosShowcase.server.wlan[0].mac.dcf txModule "\"^.tx\""
-scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeer:count 65
+scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeer:count 302
 attr interpolationmode none
 attr recordingmode count
 attr title "packets received, count"
-scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeer:sum(packetBytes) 42768
+scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeer:sum(packetBytes) 261087
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr title "packets received, sum(packetBytes)"
-scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeerUnicast:count 53
+scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeerUnicast:count 287
 attr interpolationmode none
 attr recordingmode count
 attr source ieee80211Unicast(packetReceivedFromPeer)
 attr title "packets received: unicast, count"
-scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeerUnicast:sum(packetBytes) 42104
+scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeerUnicast:sum(packetBytes) 260255
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211Unicast(packetReceivedFromPeer)
 attr title "packets received: unicast, sum(packetBytes)"
-scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeerMulticast:count 12
+scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeerMulticast:count 15
 attr interpolationmode none
 attr recordingmode count
 attr source ieee80211Multicast(packetReceivedFromPeer)
 attr title "packets received: multicast, count"
-scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeerMulticast:sum(packetBytes) 664
+scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeerMulticast:sum(packetBytes) 832
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211Multicast(packetReceivedFromPeer)
 attr title "packets received: multicast, sum(packetBytes)"
-scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeerBroadcast:count 12
+scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeerBroadcast:count 15
 attr interpolationmode none
 attr recordingmode count
 attr source ieee80211Broadcast(packetReceivedFromPeer)
 attr title "packets received: broadcast, count"
-scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeerBroadcast:sum(packetBytes) 664
+scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeerBroadcast:sum(packetBytes) 832
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211Broadcast(packetReceivedFromPeer)
 attr title "packets received: broadcast, sum(packetBytes)"
-scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeerWithRetry:count 2
+scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeerWithRetry:count 21
 attr interpolationmode none
 attr recordingmode count
 attr source ieee80211Retry(packetReceivedFromPeer)
 attr title "packets received: with retry, count"
-scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeerWithRetry:sum(packetBytes) 1928
+scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeerWithRetry:sum(packetBytes) 18394
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211Retry(packetReceivedFromPeer)
 attr title "packets received: with retry, sum(packetBytes)"
-scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:count 63
+scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:count 281
 attr interpolationmode none
 attr recordingmode count
 attr source ieee80211NotRetry(packetReceivedFromPeer)
 attr title "packets received: without retry, count"
-scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:sum(packetBytes) 40840
+scalar QosShowcase.server.wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:sum(packetBytes) 242693
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211NotRetry(packetReceivedFromPeer)
 attr title "packets received: without retry, sum(packetBytes)"
-scalar QosShowcase.server.wlan[0].mac.dcf packetSentToPeer:count 54
+scalar QosShowcase.server.wlan[0].mac.dcf packetSentToPeer:count 288
 attr interpolationmode none
 attr recordingmode count
 attr title "packets sent, count"
-scalar QosShowcase.server.wlan[0].mac.dcf packetSentToPeer:sum(packetBytes) 894
+scalar QosShowcase.server.wlan[0].mac.dcf packetSentToPeer:sum(packetBytes) 4170
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr title "packets sent, sum(packetBytes)"
-scalar QosShowcase.server.wlan[0].mac.dcf packetSentToPeerUnicast:count 53
+scalar QosShowcase.server.wlan[0].mac.dcf packetSentToPeerUnicast:count 287
 attr interpolationmode none
 attr recordingmode count
 attr source ieee80211Unicast(packetSentToPeer)
 attr title "packets sent: unicast, count"
-scalar QosShowcase.server.wlan[0].mac.dcf packetSentToPeerUnicast:sum(packetBytes) 854
+scalar QosShowcase.server.wlan[0].mac.dcf packetSentToPeerUnicast:sum(packetBytes) 4130
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211Unicast(packetSentToPeer)
@@ -2225,32 +2239,32 @@ attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211Retry(packetSentToPeer)
 attr title "packets sent: with retry, sum(packetBytes)"
-scalar QosShowcase.server.wlan[0].mac.dcf packetSentToPeerWithoutRetry:count 54
+scalar QosShowcase.server.wlan[0].mac.dcf packetSentToPeerWithoutRetry:count 288
 attr interpolationmode none
 attr recordingmode count
 attr source ieee80211NotRetry(packetSentToPeer)
 attr title "packets sent: without retry, count"
-scalar QosShowcase.server.wlan[0].mac.dcf packetSentToPeerWithoutRetry:sum(packetBytes) 894
+scalar QosShowcase.server.wlan[0].mac.dcf packetSentToPeerWithoutRetry:sum(packetBytes) 4170
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211NotRetry(packetSentToPeer)
 attr title "packets sent: without retry, sum(packetBytes)"
-scalar QosShowcase.server.wlan[0].mac.dcf packetDrop:count 126
+scalar QosShowcase.server.wlan[0].mac.dcf packetDrop:count 614
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropped
 attr title "packet drops, count"
-scalar QosShowcase.server.wlan[0].mac.dcf packetDrop:sum(packetBytes) 51538
+scalar QosShowcase.server.wlan[0].mac.dcf packetDrop:sum(packetBytes) 283045
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropped
 attr title "packet drops, sum(packetBytes)"
-scalar QosShowcase.server.wlan[0].mac.dcf packetDropNotAddressedToUs:count 126
+scalar QosShowcase.server.wlan[0].mac.dcf packetDropNotAddressedToUs:count 614
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropReasonIsNotAddressedToUs(packetDropped)
 attr title "packet drops: not addressed to us, count"
-scalar QosShowcase.server.wlan[0].mac.dcf packetDropNotAddressedToUs:sum(packetBytes) 51538
+scalar QosShowcase.server.wlan[0].mac.dcf packetDropNotAddressedToUs:sum(packetBytes) 283045
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropReasonIsNotAddressedToUs(packetDropped)
@@ -2397,19 +2411,19 @@ attr enum off,sleep,receiver,transmitter,transceiver
 par QosShowcase.server.wlan[0].mac mtu 2304B
 attr unit B
 par QosShowcase.server.wlan[0].mac qosStation false
-scalar QosShowcase.server.wlan[0].mac packetReceivedFromLower:count 192
+scalar QosShowcase.server.wlan[0].mac packetReceivedFromLower:count 927
 attr interpolationmode none
 attr recordingmode count
 attr title "packets received from lower layer, count"
-scalar QosShowcase.server.wlan[0].mac packetReceivedFromLower:sum(packetBytes) 95270
+scalar QosShowcase.server.wlan[0].mac packetReceivedFromLower:sum(packetBytes) 553661
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr title "packets received from lower layer, sum(packetBytes)"
-scalar QosShowcase.server.wlan[0].mac packetSentToLower:count 54
+scalar QosShowcase.server.wlan[0].mac packetSentToLower:count 288
 attr interpolationmode none
 attr recordingmode count
 attr title "packets sent to lower layer, count"
-scalar QosShowcase.server.wlan[0].mac packetSentToLower:sum(packetBytes) 894
+scalar QosShowcase.server.wlan[0].mac packetSentToLower:sum(packetBytes) 4170
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr title "packets sent to lower layer, sum(packetBytes)"
@@ -2421,40 +2435,40 @@ scalar QosShowcase.server.wlan[0].mac packetReceivedFromUpper:sum(packetBytes) 3
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr title "packets received from upper layer, sum(packetBytes)"
-scalar QosShowcase.server.wlan[0].mac packetSentToUpper:count 46
+scalar QosShowcase.server.wlan[0].mac packetSentToUpper:count 280
 attr interpolationmode none
 attr recordingmode count
 attr title "packets sent to upper layer, count"
-scalar QosShowcase.server.wlan[0].mac packetSentToUpper:sum(packetBytes) 40656
+scalar QosShowcase.server.wlan[0].mac packetSentToUpper:sum(packetBytes) 252255
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr title "packets sent to upper layer, sum(packetBytes)"
-scalar QosShowcase.server.wlan[0].mac packetDrop:count 127
+scalar QosShowcase.server.wlan[0].mac packetDrop:count 625
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropped
 attr title "packet drops, count"
-scalar QosShowcase.server.wlan[0].mac packetDrop:sum(packetBytes) 52502
+scalar QosShowcase.server.wlan[0].mac packetDrop:sum(packetBytes) 292574
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropped
 attr title "packet drops, sum(packetBytes)"
-scalar QosShowcase.server.wlan[0].mac packetDropIncorrectlyReceived:count 1
+scalar QosShowcase.server.wlan[0].mac packetDropIncorrectlyReceived:count 11
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
 attr title "packet drops: incorrectly received, count"
-scalar QosShowcase.server.wlan[0].mac packetDropIncorrectlyReceived:sum(packetBytes) 964
+scalar QosShowcase.server.wlan[0].mac packetDropIncorrectlyReceived:sum(packetBytes) 9529
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
 attr title "packet drops: incorrectly received, sum(packetBytes)"
-scalar QosShowcase.server.wlan[0].mac packetDropNotAddressedToUs:count 126
+scalar QosShowcase.server.wlan[0].mac packetDropNotAddressedToUs:count 614
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropReasonIsNotAddressedToUs(packetDropped)
 attr title "packet drops: not addressed to us, count"
-scalar QosShowcase.server.wlan[0].mac packetDropNotAddressedToUs:sum(packetBytes) 51538
+scalar QosShowcase.server.wlan[0].mac packetDropNotAddressedToUs:sum(packetBytes) 283045
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropReasonIsNotAddressedToUs(packetDropped)
@@ -2596,18 +2610,18 @@ par QosShowcase.server.wlan[0].radio channelNumber 0
 par QosShowcase.server.wlan[0].radio crcMode "\"declared\""
 attr enum declared,computed
 statistic QosShowcase.server.wlan[0].radio minSnir:histogram
-field count 192
-field mean 8101.4643412176
-field stddev 2382.4451725767
+field count 927
+field mean 8041.6207864282
+field stddev 2461.5677385617
 field min 1.9995912063482
 field max 9782.8877605193
-field sum 1555481.1535138
-field sqrsum 13685799693.692
+field sum 7454582.469019
+field sqrsum 65557851704.401
 attr recordingmode histogram
 attr source minimumSnir(packetSentToUpper)
 attr title "Min SNIR"
 bin	-inf	0
-bin	0	1
+bin	0	11
 bin	200	0
 bin	400	0
 bin	600	0
@@ -2631,7 +2645,7 @@ bin	4000	0
 bin	4200	0
 bin	4400	0
 bin	4600	0
-bin	4800	64
+bin	4800	308
 bin	5000	0
 bin	5200	0
 bin	5400	0
@@ -2655,7 +2669,7 @@ bin	8800	0
 bin	9000	0
 bin	9200	0
 bin	9400	0
-bin	9600	127
+bin	9600	608
 bin	9800	0
 bin	10000	0
 bin	10200	0
@@ -2665,13 +2679,13 @@ bin	10800	0
 bin	11000	0
 bin	11200	0
 statistic QosShowcase.server.wlan[0].radio packetErrorRate:histogram
-field count 192
-field mean 0.0052083333333333
-field stddev 0.072168783648703
+field count 927
+field mean 0.011866235167206
+field stddev 0.10834246664631
 field min 0
 field max 1
-field sum 1
-field sqrsum 1
+field sum 11
+field sqrsum 11
 attr recordingmode histogram
 attr source packetErrorRate(packetSentToUpper)
 attr title "Packet error rate"
@@ -2701,7 +2715,7 @@ bin	-0.08	0
 bin	-0.06	0
 bin	-0.04	0
 bin	-0.02	0
-bin	0	191
+bin	0	916
 bin	0.02	0
 bin	0.04	0
 bin	0.06	0
@@ -2751,7 +2765,7 @@ bin	0.92	0
 bin	0.94	0
 bin	0.96	0
 bin	0.98	0
-bin	1	1
+bin	1	11
 bin	1.02	0
 statistic QosShowcase.server.wlan[0].radio bitErrorRate:histogram
 field count 0
@@ -2781,21 +2795,21 @@ attr title "Symbol error rate"
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar QosShowcase.server.wlan[0].radio transmissionState:count 216
+scalar QosShowcase.server.wlan[0].radio transmissionState:count 1152
 attr enum UNDEFINED,IDLE,TRANSMITTING
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source transmissionStateChanged
 attr title "Radio transmission state, count"
 attr type enum
-scalar QosShowcase.server.wlan[0].radio receptionState:count 495
+scalar QosShowcase.server.wlan[0].radio receptionState:count 2441
 attr enum UNDEFINED,IDLE,BUSY,RECEIVING
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source receptionStateChanged
 attr title "Radio reception state, count"
 attr type enum
-scalar QosShowcase.server.wlan[0].radio radioMode:count 111
+scalar QosShowcase.server.wlan[0].radio radioMode:count 579
 attr enum OFF,SLEEP,RECEIVER,TRANSMITTER,TRANSCEIVER,SWITCHING
 attr interpolationmode sample-hold
 attr recordingmode count
@@ -3117,12 +3131,12 @@ par QosShowcase.server.udp icmpv6Module "\"^.ipv6.icmpv6\""
 par QosShowcase.server.udp crcMode "\"declared\""
 attr enum disabled,declared,computed
 par QosShowcase.server.udp defaultMulticastLoop true
-scalar QosShowcase.server.udp packetReceived:count 45
+scalar QosShowcase.server.udp packetReceived:count 279
 attr interpolationmode none
 attr recordingmode count
 attr source packetReceived
 attr title "packets received, count"
-scalar QosShowcase.server.udp packetReceived:sum(packetBytes) 39360
+scalar QosShowcase.server.udp packetReceived:sum(packetBytes) 244407
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetReceived
@@ -3137,7 +3151,7 @@ attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetSent
 attr title "packets sent, sum(packetBytes)"
-scalar QosShowcase.server.udp passedUpPk:count 45
+scalar QosShowcase.server.udp passedUpPk:count 279
 attr interpolationmode none
 attr recordingmode count
 attr source packetSentToUpper
@@ -3199,24 +3213,24 @@ par QosShowcase.server.app[0] stopOperationExtraTime -1s
 attr unit s
 par QosShowcase.server.app[0] stopOperationTimeout 2s
 attr unit s
-scalar QosShowcase.server.app[0] packetReceived:count 18
+scalar QosShowcase.server.app[0] packetReceived:count 119
 attr interpolationmode none
 attr recordingmode count
 attr source packetReceived
 attr title "packets received, count"
-scalar QosShowcase.server.app[0] packetReceived:sum(packetBytes) 16200
+scalar QosShowcase.server.app[0] packetReceived:sum(packetBytes) 107100
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetReceived
 attr title "packets received, sum(packetBytes)"
 statistic QosShowcase.server.app[0] endToEndDelay:histogram
-field count 18
-field mean 0.019637285028778
-field stddev 0.010880339083468
+field count 119
+field mean 0.077707645478412
+field stddev 0.029494365585418
 field min 0.002885773848
-field max 0.036507081617
-field sum 0.353471130518
-field sqrsum 0.0089537035751375
+field max 0.10106713103
+field sum 9.247209811931
+field sqrsum 0.8212291786818
 attr interpolationmode none
 attr recordingmode histogram
 attr source dataAge(packetReceived)
@@ -3224,96 +3238,69 @@ attr title "end-to-end delay"
 attr unit s
 bin	-inf	0
 bin	0	0
-bin	0.0005	0
-bin	0.001	0
-bin	0.0015	0
-bin	0.002	0
-bin	0.0025	1
-bin	0.003	0
-bin	0.0035	0
-bin	0.004	0
-bin	0.0045	1
-bin	0.005	0
-bin	0.0055	0
-bin	0.006	0
-bin	0.0065	0
-bin	0.007	1
-bin	0.0075	0
-bin	0.008	0
-bin	0.0085	0
-bin	0.009	1
-bin	0.0095	0
-bin	0.01	0
-bin	0.0105	1
-bin	0.011	0
-bin	0.0115	1
+bin	0.002	1
+bin	0.004	1
+bin	0.006	1
+bin	0.008	1
+bin	0.01	2
 bin	0.012	0
-bin	0.0125	0
-bin	0.013	0
-bin	0.0135	0
-bin	0.014	0
-bin	0.0145	1
-bin	0.015	0
-bin	0.0155	0
-bin	0.016	0
-bin	0.0165	1
-bin	0.017	0
-bin	0.0175	1
-bin	0.018	0
-bin	0.0185	0
-bin	0.019	1
-bin	0.0195	1
+bin	0.014	1
+bin	0.016	2
+bin	0.018	2
 bin	0.02	0
-bin	0.0205	0
-bin	0.021	0
-bin	0.0215	0
 bin	0.022	1
-bin	0.0225	0
-bin	0.023	0
-bin	0.0235	0
 bin	0.024	0
-bin	0.0245	0
-bin	0.025	0
-bin	0.0255	0
-bin	0.026	0
-bin	0.0265	0
-bin	0.027	0
-bin	0.0275	1
+bin	0.026	1
 bin	0.028	0
-bin	0.0285	0
-bin	0.029	0
-bin	0.0295	0
-bin	0.03	1
-bin	0.0305	0
-bin	0.031	0
-bin	0.0315	1
+bin	0.03	2
 bin	0.032	0
-bin	0.0325	0
-bin	0.033	0
-bin	0.0335	0
-bin	0.034	1
-bin	0.0345	0
-bin	0.035	1
-bin	0.0355	0
-bin	0.036	0
-bin	0.0365	1
-bin	0.037	0
-bin	0.0375	0
-bin	0.038	0
-bin	0.0385	0
-bin	0.039	0
-bin	0.0395	0
-bin	0.04	0
-bin	0.0405	0
-bin	0.041	0
-bin	0.0415	0
-bin	0.042	0
-bin	0.0425	0
-bin	0.043	0
-bin	0.0435	0
-bin	0.044	0
-bin	0.0445	0
-bin	0.045	0
+bin	0.034	2
+bin	0.036	1
+bin	0.038	1
+bin	0.04	2
+bin	0.042	1
+bin	0.044	2
+bin	0.046	1
+bin	0.048	0
+bin	0.05	0
+bin	0.052	1
+bin	0.054	2
+bin	0.056	1
+bin	0.058	1
+bin	0.06	0
+bin	0.062	2
+bin	0.064	0
+bin	0.066	1
+bin	0.068	2
+bin	0.07	0
+bin	0.072	1
+bin	0.074	2
+bin	0.076	1
+bin	0.078	1
+bin	0.08	1
+bin	0.082	1
+bin	0.084	1
+bin	0.086	2
+bin	0.088	1
+bin	0.09	0
+bin	0.092	0
+bin	0.094	19
+bin	0.096	34
+bin	0.098	15
+bin	0.1	5
+bin	0.102	0
+bin	0.104	0
+bin	0.106	0
+bin	0.108	0
+bin	0.11	0
+bin	0.112	0
+bin	0.114	0
+bin	0.116	0
+bin	0.118	0
+bin	0.12	0
+bin	0.122	0
+bin	0.124	0
+bin	0.126	0
 par QosShowcase.server.app[1] typename "\"inet.applications.udpapp.UdpSink\""
 par QosShowcase.server.app[1] interfaceTableModule "\"QosShowcase.server.interfaceTable\""
 par QosShowcase.server.app[1] startTime 0s
@@ -3328,24 +3315,24 @@ par QosShowcase.server.app[1] stopOperationExtraTime -1s
 attr unit s
 par QosShowcase.server.app[1] stopOperationTimeout 2s
 attr unit s
-scalar QosShowcase.server.app[1] packetReceived:count 22
+scalar QosShowcase.server.app[1] packetReceived:count 135
 attr interpolationmode none
 attr recordingmode count
 attr source packetReceived
 attr title "packets received, count"
-scalar QosShowcase.server.app[1] packetReceived:sum(packetBytes) 19800
+scalar QosShowcase.server.app[1] packetReceived:sum(packetBytes) 121500
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetReceived
 attr title "packets received, sum(packetBytes)"
 statistic QosShowcase.server.app[1] endToEndDelay:histogram
-field count 22
-field mean 0.020177577722091
-field stddev 0.010979978287472
+field count 135
+field mean 0.076697451610356
+field stddev 0.02988483297159
 field min 0.003150492916
-field max 0.037482663746
-field sum 0.443906709886
-field sqrsum 0.011488720527143
+field max 0.101221513041
+field sum 10.354155967398
+field sqrsum 0.91381321066872
 attr interpolationmode none
 attr recordingmode histogram
 attr source dataAge(packetReceived)
@@ -3353,53 +3340,69 @@ attr title "end-to-end delay"
 attr unit s
 bin	-inf	0
 bin	0	0
-bin	0.001	0
-bin	0.002	0
-bin	0.003	2
+bin	0.002	2
 bin	0.004	0
-bin	0.005	0
-bin	0.006	1
-bin	0.007	1
-bin	0.008	0
-bin	0.009	1
-bin	0.01	0
-bin	0.011	1
-bin	0.012	0
-bin	0.013	2
-bin	0.014	0
-bin	0.015	1
-bin	0.016	0
-bin	0.017	1
-bin	0.018	1
-bin	0.019	1
-bin	0.02	0
-bin	0.021	2
+bin	0.006	2
+bin	0.008	1
+bin	0.01	1
+bin	0.012	2
+bin	0.014	1
+bin	0.016	1
+bin	0.018	2
+bin	0.02	2
 bin	0.022	0
-bin	0.023	0
-bin	0.024	0
-bin	0.025	1
+bin	0.024	1
 bin	0.026	0
-bin	0.027	0
 bin	0.028	1
-bin	0.029	0
 bin	0.03	1
-bin	0.031	0
-bin	0.032	1
-bin	0.033	1
+bin	0.032	2
 bin	0.034	1
-bin	0.035	0
-bin	0.036	1
-bin	0.037	1
-bin	0.038	0
-bin	0.039	0
-bin	0.04	0
-bin	0.041	0
-bin	0.042	0
-bin	0.043	0
-bin	0.044	0
-bin	0.045	0
-bin	0.046	0
-bin	0.047	0
+bin	0.036	2
+bin	0.038	1
+bin	0.04	3
+bin	0.042	1
+bin	0.044	1
+bin	0.046	1
+bin	0.048	1
+bin	0.05	1
+bin	0.052	1
+bin	0.054	1
+bin	0.056	2
+bin	0.058	0
+bin	0.06	2
+bin	0.062	1
+bin	0.064	1
+bin	0.066	1
+bin	0.068	1
+bin	0.07	1
+bin	0.072	1
+bin	0.074	2
+bin	0.076	1
+bin	0.078	1
+bin	0.08	3
+bin	0.082	0
+bin	0.084	2
+bin	0.086	1
+bin	0.088	1
+bin	0.09	1
+bin	0.092	0
+bin	0.094	25
+bin	0.096	32
+bin	0.098	14
+bin	0.1	9
+bin	0.102	0
+bin	0.104	0
+bin	0.106	0
+bin	0.108	0
+bin	0.11	0
+bin	0.112	0
+bin	0.114	0
+bin	0.116	0
+bin	0.118	0
+bin	0.12	0
+bin	0.122	0
+bin	0.124	0
+bin	0.126	0
 par QosShowcase.server.app[2] typename "\"inet.applications.udpapp.UdpSink\""
 par QosShowcase.server.app[2] interfaceTableModule "\"QosShowcase.server.interfaceTable\""
 par QosShowcase.server.app[2] startTime 0s
@@ -3414,24 +3417,24 @@ par QosShowcase.server.app[2] stopOperationExtraTime -1s
 attr unit s
 par QosShowcase.server.app[2] stopOperationTimeout 2s
 attr unit s
-scalar QosShowcase.server.app[2] packetReceived:count 5
+scalar QosShowcase.server.app[2] packetReceived:count 22
 attr interpolationmode none
 attr recordingmode count
 attr source packetReceived
 attr title "packets received, count"
-scalar QosShowcase.server.app[2] packetReceived:sum(packetBytes) 3000
+scalar QosShowcase.server.app[2] packetReceived:sum(packetBytes) 13200
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetReceived
 attr title "packets received, sum(packetBytes)"
 statistic QosShowcase.server.app[2] endToEndDelay:histogram
-field count 5
-field mean 0.0184488134848
-field stddev 0.010628654752628
+field count 22
+field mean 0.065732393525091
+field stddev 0.032374409870846
 field min 0.00556828164
-field max 0.033048777312
-field sum 0.092244067424
-field sqrsum 0.0021536668023869
+field max 0.100936116569
+field sum 1.446112657552
+field sqrsum 0.11706659699202
 attr interpolationmode none
 attr recordingmode histogram
 attr source dataAge(packetReceived)
@@ -3439,86 +3442,69 @@ attr title "end-to-end delay"
 attr unit s
 bin	-inf	0
 bin	0	0
-bin	0.0005	0
-bin	0.001	0
-bin	0.0015	0
 bin	0.002	0
-bin	0.0025	0
-bin	0.003	0
-bin	0.0035	0
-bin	0.004	0
-bin	0.0045	0
-bin	0.005	0
-bin	0.0055	1
+bin	0.004	1
 bin	0.006	0
-bin	0.0065	0
-bin	0.007	0
-bin	0.0075	0
 bin	0.008	0
-bin	0.0085	0
-bin	0.009	0
-bin	0.0095	0
-bin	0.01	0
-bin	0.0105	0
-bin	0.011	0
-bin	0.0115	1
+bin	0.01	1
 bin	0.012	0
-bin	0.0125	0
-bin	0.013	0
-bin	0.0135	0
 bin	0.014	0
-bin	0.0145	0
-bin	0.015	0
-bin	0.0155	0
 bin	0.016	0
-bin	0.0165	0
-bin	0.017	0
-bin	0.0175	0
 bin	0.018	1
-bin	0.0185	0
-bin	0.019	0
-bin	0.0195	0
 bin	0.02	0
-bin	0.0205	0
-bin	0.021	0
-bin	0.0215	0
-bin	0.022	0
-bin	0.0225	0
-bin	0.023	0
-bin	0.0235	1
+bin	0.022	1
 bin	0.024	0
-bin	0.0245	0
-bin	0.025	0
-bin	0.0255	0
 bin	0.026	0
-bin	0.0265	0
-bin	0.027	0
-bin	0.0275	0
 bin	0.028	0
-bin	0.0285	0
-bin	0.029	0
-bin	0.0295	0
 bin	0.03	0
-bin	0.0305	0
-bin	0.031	0
-bin	0.0315	0
-bin	0.032	0
-bin	0.0325	0
-bin	0.033	1
-bin	0.0335	0
+bin	0.032	1
 bin	0.034	0
-bin	0.0345	0
-bin	0.035	0
-bin	0.0355	0
 bin	0.036	0
-bin	0.0365	0
-bin	0.037	0
-bin	0.0375	0
-bin	0.038	0
-bin	0.0385	0
-bin	0.039	0
-bin	0.0395	0
+bin	0.038	1
 bin	0.04	0
+bin	0.042	1
+bin	0.044	0
+bin	0.046	0
+bin	0.048	1
+bin	0.05	0
+bin	0.052	0
+bin	0.054	0
+bin	0.056	1
+bin	0.058	0
+bin	0.06	0
+bin	0.062	0
+bin	0.064	0
+bin	0.066	1
+bin	0.068	0
+bin	0.07	1
+bin	0.072	0
+bin	0.074	0
+bin	0.076	0
+bin	0.078	1
+bin	0.08	0
+bin	0.082	1
+bin	0.084	0
+bin	0.086	0
+bin	0.088	0
+bin	0.09	1
+bin	0.092	0
+bin	0.094	3
+bin	0.096	4
+bin	0.098	0
+bin	0.1	1
+bin	0.102	0
+bin	0.104	0
+bin	0.106	0
+bin	0.108	0
+bin	0.11	0
+bin	0.112	0
+bin	0.114	0
+bin	0.116	0
+bin	0.118	0
+bin	0.12	0
+bin	0.122	0
+bin	0.124	0
+bin	0.126	0
 par QosShowcase.server.app[3] typename "\"inet.applications.udpapp.UdpSink\""
 par QosShowcase.server.app[3] interfaceTableModule "\"QosShowcase.server.interfaceTable\""
 par QosShowcase.server.app[3] startTime 0s
@@ -3533,32 +3519,101 @@ par QosShowcase.server.app[3] stopOperationExtraTime -1s
 attr unit s
 par QosShowcase.server.app[3] stopOperationTimeout 2s
 attr unit s
-scalar QosShowcase.server.app[3] packetReceived:count 0
+scalar QosShowcase.server.app[3] packetReceived:count 3
 attr interpolationmode none
 attr recordingmode count
 attr source packetReceived
 attr title "packets received, count"
-scalar QosShowcase.server.app[3] packetReceived:sum(packetBytes) 0
+scalar QosShowcase.server.app[3] packetReceived:sum(packetBytes) 375
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetReceived
 attr title "packets received, sum(packetBytes)"
 statistic QosShowcase.server.app[3] endToEndDelay:histogram
-field count 0
-field mean nan
-field stddev nan
-field min nan
-field max nan
-field sum 0
-field sqrsum 0
+field count 3
+field mean 0.081291346518
+field stddev 0.026175805368414
+field min 0.051069654395
+field max 0.096801918238
+field sum 0.243874039554
+field sqrsum 0.021195194629499
 attr interpolationmode none
 attr recordingmode histogram
 attr source dataAge(packetReceived)
 attr title "end-to-end delay"
 attr unit s
 bin	-inf	0
-bin	0	0
-bin	1	0
+bin	0.039	0
+bin	0.04	0
+bin	0.041	0
+bin	0.042	0
+bin	0.043	0
+bin	0.044	0
+bin	0.045	0
+bin	0.046	0
+bin	0.047	0
+bin	0.048	0
+bin	0.049	0
+bin	0.05	0
+bin	0.051	1
+bin	0.052	0
+bin	0.053	0
+bin	0.054	0
+bin	0.055	0
+bin	0.056	0
+bin	0.057	0
+bin	0.058	0
+bin	0.059	0
+bin	0.06	0
+bin	0.061	0
+bin	0.062	0
+bin	0.063	0
+bin	0.064	0
+bin	0.065	0
+bin	0.066	0
+bin	0.067	0
+bin	0.068	0
+bin	0.069	0
+bin	0.07	0
+bin	0.071	0
+bin	0.072	0
+bin	0.073	0
+bin	0.074	0
+bin	0.075	0
+bin	0.076	0
+bin	0.077	0
+bin	0.078	0
+bin	0.079	0
+bin	0.08	0
+bin	0.081	0
+bin	0.082	0
+bin	0.083	0
+bin	0.084	0
+bin	0.085	0
+bin	0.086	0
+bin	0.087	0
+bin	0.088	0
+bin	0.089	0
+bin	0.09	0
+bin	0.091	0
+bin	0.092	0
+bin	0.093	0
+bin	0.094	0
+bin	0.095	0
+bin	0.096	2
+bin	0.097	0
+bin	0.098	0
+bin	0.099	0
+bin	0.1	0
+bin	0.101	0
+bin	0.102	0
+bin	0.103	0
+bin	0.104	0
+bin	0.105	0
+bin	0.106	0
+bin	0.107	0
+bin	0.108	0
+bin	0.109	0
 par QosShowcase.server.at typename "\"inet.common.MessageDispatcher\""
 par QosShowcase.server.at displayStringTextFormat "\"processed %p pk (%l)\""
 par QosShowcase.server.at interfaceTableModule "\"QosShowcase.server.interfaceTable\""
@@ -3769,28 +3824,28 @@ attr recordingmode max
 attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
 attr title "queue length, max"
 attr unit pk
-scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:timeavg 3.5377762427529
+scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:timeavg 19.630635451124
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode timeavg
 attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
 attr title "queue length, timeavg"
 attr unit pk
-scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue queueBitLength:last 745800
+scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue queueBitLength:last 752000
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode last
 attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
 attr title "queue bit length, last"
 attr unit b
-scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue queueBitLength:max 745800
+scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue queueBitLength:max 766400
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode max
 attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
 attr title "queue bit length, max"
 attr unit b
-scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue queueBitLength:timeavg 26186.208816279
+scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue queueBitLength:timeavg 147161.23271
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode timeavg
@@ -3798,85 +3853,95 @@ attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetP
 attr title "queue bit length, timeavg"
 attr unit b
 statistic QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue queueingTime:histogram
-field count 60
-field mean 0.0172916857395
-field stddev 0.011157419914578
+field count 304
+field mean 0.067320206475543
+field stddev 0.027593694173735
 field min 0
-field max 0.036617226804
-field sum 1.03750114437
-field sqrsum 0.02528493687268
+field max 0.089227859445
+field sum 20.465342768565
+field sqrsum 1.6084389240931
 attr interpolationmode none
 attr recordingmode histogram
 attr source queueingTime(packetPulled)
 attr title "queueing times"
 attr unit s
 bin	-inf	0
-bin	0	7
-bin	0.001	1
-bin	0.002	1
-bin	0.003	1
-bin	0.004	1
-bin	0.005	2
-bin	0.006	1
-bin	0.007	1
-bin	0.008	1
-bin	0.009	3
-bin	0.01	0
-bin	0.011	2
-bin	0.012	3
-bin	0.013	1
-bin	0.014	2
-bin	0.015	1
-bin	0.016	1
-bin	0.017	1
-bin	0.018	1
-bin	0.019	1
-bin	0.02	2
-bin	0.021	1
-bin	0.022	2
-bin	0.023	3
-bin	0.024	2
-bin	0.025	2
-bin	0.026	1
-bin	0.027	3
-bin	0.028	2
-bin	0.029	1
+bin	0	8
+bin	0.002	2
+bin	0.004	3
+bin	0.006	2
+bin	0.008	4
+bin	0.01	2
+bin	0.012	4
+bin	0.014	3
+bin	0.016	2
+bin	0.018	2
+bin	0.02	3
+bin	0.022	5
+bin	0.024	4
+bin	0.026	4
+bin	0.028	3
 bin	0.03	3
-bin	0.031	0
-bin	0.032	1
-bin	0.033	1
-bin	0.034	2
-bin	0.035	1
-bin	0.036	1
-bin	0.037	0
-bin	0.038	0
-bin	0.039	0
-bin	0.04	0
-bin	0.041	0
-bin	0.042	0
-bin	0.043	0
-bin	0.044	0
-bin	0.045	0
-bin	0.046	0
-scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingPackets:count 60
+bin	0.032	2
+bin	0.034	3
+bin	0.036	2
+bin	0.038	1
+bin	0.04	1
+bin	0.042	3
+bin	0.044	3
+bin	0.046	1
+bin	0.048	4
+bin	0.05	3
+bin	0.052	2
+bin	0.054	3
+bin	0.056	3
+bin	0.058	5
+bin	0.06	3
+bin	0.062	1
+bin	0.064	2
+bin	0.066	2
+bin	0.068	2
+bin	0.07	2
+bin	0.072	5
+bin	0.074	5
+bin	0.076	2
+bin	0.078	1
+bin	0.08	3
+bin	0.082	15
+bin	0.084	120
+bin	0.086	38
+bin	0.088	13
+bin	0.09	0
+bin	0.092	0
+bin	0.094	0
+bin	0.096	0
+bin	0.098	0
+bin	0.1	0
+bin	0.102	0
+bin	0.104	0
+bin	0.106	0
+bin	0.108	0
+bin	0.11	0
+bin	0.112	0
+scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingPackets:count 304
 attr recordingmode count
 attr source packetPulled
 attr title "outgoing packets, count"
 attr unit pk
-scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingPacketLengths:sum 409024
+scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingPacketLengths:sum 2236152
 attr interpolationmode none
 attr recordingmode sum
 attr source packetLength(packetPulled)
 attr title "outgoing packet lengths, sum"
 attr unit b
 statistic QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingPacketLengths:histogram
-field count 60
-field mean 6817.0666666667
-field stddev 2117.6029770383
+field count 304
+field mean 7355.7631578947
+field stddev 1253.0696499721
 field min 272
 field max 7712
-field sum 409024
-field sqrsum 3052914176
+field sum 2236152
+field sqrsum 16924370112
 attr interpolationmode none
 attr recordingmode histogram
 attr source packetLength(packetPulled)
@@ -3890,7 +3955,7 @@ bin	600	0
 bin	800	0
 bin	1000	0
 bin	1200	0
-bin	1400	0
+bin	1400	3
 bin	1600	0
 bin	1800	0
 bin	2000	0
@@ -3909,7 +3974,7 @@ bin	4400	0
 bin	4600	0
 bin	4800	0
 bin	5000	0
-bin	5200	7
+bin	5200	22
 bin	5400	0
 bin	5600	0
 bin	5800	0
@@ -3921,7 +3986,7 @@ bin	6800	0
 bin	7000	0
 bin	7200	0
 bin	7400	0
-bin	7600	48
+bin	7600	274
 bin	7800	0
 bin	8000	0
 bin	8200	0
@@ -3948,25 +4013,25 @@ attr unit s
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue incomingPackets:count 375
+scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue incomingPackets:count 2140
 attr recordingmode count
 attr source packetPushStarted
 attr title "incoming packets, count"
 attr unit pk
-scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue incomingPacketLengths:sum 2724704
+scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue incomingPacketLengths:sum 15704584
 attr interpolationmode none
 attr recordingmode sum
 attr source packetLength(packetPushStarted)
 attr title "incoming packet lengths, sum"
 attr unit b
 statistic QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue incomingPacketLengths:histogram
-field count 375
-field mean 7265.8773333333
-field stddev 1271.7310010074
+field count 2140
+field mean 7338.5906542056
+field stddev 1057.5304277496
 field min 272
 field max 7712
-field sum 2724704
-field sqrsum 20402235136
+field sum 15704584
+field sqrsum 117641708096
 attr interpolationmode none
 attr recordingmode histogram
 attr source packetLength(packetPushStarted)
@@ -3980,7 +4045,7 @@ bin	600	0
 bin	800	0
 bin	1000	0
 bin	1200	0
-bin	1400	4
+bin	1400	25
 bin	1600	0
 bin	1800	0
 bin	2000	0
@@ -3999,7 +4064,7 @@ bin	4400	0
 bin	4600	0
 bin	4800	0
 bin	5000	0
-bin	5200	44
+bin	5200	253
 bin	5400	0
 bin	5600	0
 bin	5800	0
@@ -4011,7 +4076,7 @@ bin	6800	0
 bin	7000	0
 bin	7200	0
 bin	7400	0
-bin	7600	322
+bin	7600	1857
 bin	7800	0
 bin	8000	0
 bin	8200	0
@@ -4022,13 +4087,13 @@ bin	9000	0
 bin	9200	0
 bin	9400	0
 bin	9600	0
-scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue droppedPacketsQueueOverflow:count 215
+scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue droppedPacketsQueueOverflow:count 1736
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropReasonIsQueueOverflow(packetDropped)
 attr title "dropped packets: queue overflow, count"
 attr unit pk
-scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue droppedPacketLengthsQueueOverflow:sum 1569880
+scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.pendingQueue droppedPacketLengthsQueueOverflow:sum 12716432
 attr interpolationmode none
 attr recordingmode sum
 attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
@@ -4039,13 +4104,13 @@ par QosShowcase.client.wlan[0].mac.dcf.channelAccess.inProgressFrames pendingQue
 par QosShowcase.client.wlan[0].mac.dcf.channelAccess.inProgressFrames originatorMacDataServiceModule "\"^.^.originatorMacDataService\""
 par QosShowcase.client.wlan[0].mac.dcf.channelAccess.inProgressFrames ackHandlerModule "\"^.^.ackHandler\""
 statistic QosShowcase.client.wlan[0].mac.dcf.channelAccess.inProgressFrames queueingTime:histogram
-field count 59
-field mean 0.00090454809125424
-field stddev 0.00043504293795879
+field count 303
+field mean 0.0010677455445611
+field stddev 0.00049803038596715
 field min 4.2e-05
-field max 0.001710440976
-field sum 0.053368337384
-field sqrsum 5.9251444470443e-05
+field max 0.003371384438
+field sum 0.323526900002
+field sqrsum 0.00042035075415746
 attr interpolationmode none
 attr recordingmode histogram
 attr source queueingTime(packetDequeued)
@@ -4059,49 +4124,82 @@ bin	0.0002	1
 bin	0.00025	0
 bin	0.0003	0
 bin	0.00035	0
-bin	0.0004	0
-bin	0.00045	3
-bin	0.0005	2
-bin	0.00055	6
-bin	0.0006	2
-bin	0.00065	3
-bin	0.0007	1
-bin	0.00075	1
-bin	0.0008	2
-bin	0.00085	2
-bin	0.0009	4
-bin	0.00095	1
-bin	0.001	6
-bin	0.00105	0
-bin	0.0011	2
-bin	0.00115	0
-bin	0.0012	1
-bin	0.00125	0
-bin	0.0013	6
-bin	0.00135	3
-bin	0.0014	0
-bin	0.00145	4
-bin	0.0015	2
-bin	0.00155	0
-bin	0.0016	1
-bin	0.00165	0
-bin	0.0017	1
-bin	0.00175	0
+bin	0.0004	3
+bin	0.00045	22
+bin	0.0005	12
+bin	0.00055	17
+bin	0.0006	11
+bin	0.00065	14
+bin	0.0007	7
+bin	0.00075	5
+bin	0.0008	8
+bin	0.00085	7
+bin	0.0009	15
+bin	0.00095	10
+bin	0.001	20
+bin	0.00105	11
+bin	0.0011	13
+bin	0.00115	13
+bin	0.0012	11
+bin	0.00125	9
+bin	0.0013	18
+bin	0.00135	10
+bin	0.0014	6
+bin	0.00145	12
+bin	0.0015	3
+bin	0.00155	10
+bin	0.0016	8
+bin	0.00165	2
+bin	0.0017	2
+bin	0.00175	4
 bin	0.0018	0
-bin	0.00185	0
+bin	0.00185	1
 bin	0.0019	0
 bin	0.00195	0
-bin	0.002	0
+bin	0.002	2
 bin	0.00205	0
 bin	0.0021	0
-bin	0.00215	0
+bin	0.00215	1
+bin	0.0022	2
+bin	0.00225	0
+bin	0.0023	1
+bin	0.00235	1
+bin	0.0024	0
+bin	0.00245	0
+bin	0.0025	0
+bin	0.00255	0
+bin	0.0026	0
+bin	0.00265	0
+bin	0.0027	2
+bin	0.00275	0
+bin	0.0028	0
+bin	0.00285	0
+bin	0.0029	2
+bin	0.00295	0
+bin	0.003	1
+bin	0.00305	0
+bin	0.0031	0
+bin	0.00315	0
+bin	0.0032	0
+bin	0.00325	0
+bin	0.0033	0
+bin	0.00335	1
+bin	0.0034	0
+bin	0.00345	0
+bin	0.0035	0
+bin	0.00355	0
+bin	0.0036	0
+bin	0.00365	0
+bin	0.0037	0
+bin	0.00375	0
+bin	0.0038	0
 scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:max 2
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode max
 attr source "warmup(count(packetEnqueued) - count(packetDequeued))"
 attr title "queue length, max"
-scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:timeavg 0.051743033633247
+scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:timeavg 0.2590028729489
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode timeavg
@@ -4110,10 +4208,10 @@ attr title "queue length, timeavg"
 par QosShowcase.client.wlan[0].mac.dcf.channelAccess.contention typename "\"inet.linklayer.ieee80211.mac.contention.Contention\""
 par QosShowcase.client.wlan[0].mac.dcf.channelAccess.contention initialChannelBusy true
 par QosShowcase.client.wlan[0].mac.dcf.channelAccess.contention backoffOptimization true
-scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.contention channelAccessGranted:count 60
+scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.contention channelAccessGranted:count 314
 attr recordingmode count
 attr title "channel access granted, count"
-scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.contention stateChanged:count 998
+scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess.contention stateChanged:count 4914
 attr enum IDLE,DEFER,IFS_AND_BACKOFF
 attr interpolationmode none
 attr recordingmode count
@@ -4124,7 +4222,7 @@ par QosShowcase.client.wlan[0].mac.dcf.channelAccess difsn -1
 par QosShowcase.client.wlan[0].mac.dcf.channelAccess cwMin -1
 par QosShowcase.client.wlan[0].mac.dcf.channelAccess cwMax -1
 par QosShowcase.client.wlan[0].mac.dcf.channelAccess rxModule "\"^.^.rx\""
-scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess channelOwnershipChanged:count 120
+scalar QosShowcase.client.wlan[0].mac.dcf.channelAccess channelOwnershipChanged:count 628
 attr interpolationmode sample-hold
 attr recordingmode count
 attr title "channel ownership, count"
@@ -4152,7 +4250,7 @@ attr title "packet drops: duplicate detected, sum(packetBytes)"
 scalar QosShowcase.client.wlan[0].mac.dcf.recipientMacDataService packetDeaggregated:count 0
 attr recordingmode count
 attr title "packets deaggregated, count"
-scalar QosShowcase.client.wlan[0].mac.dcf.recipientMacDataService packetDefragmented:count 16
+scalar QosShowcase.client.wlan[0].mac.dcf.recipientMacDataService packetDefragmented:count 19
 attr recordingmode count
 attr title "packets defragmented, count"
 par QosShowcase.client.wlan[0].mac.dcf.rateSelection typename "\"inet.linklayer.ieee80211.mac.rateselection.RateSelection\""
@@ -4201,40 +4299,40 @@ par QosShowcase.client.wlan[0].mac.dcf.ctsPolicy rateSelectionModule "\"^.rateSe
 par QosShowcase.client.wlan[0].mac.dcf typename "\"inet.linklayer.ieee80211.mac.coordinationfunction.Dcf\""
 par QosShowcase.client.wlan[0].mac.dcf rxModule "\"^.rx\""
 par QosShowcase.client.wlan[0].mac.dcf txModule "\"^.tx\""
-scalar QosShowcase.client.wlan[0].mac.dcf packetReceivedFromPeer:count 74
+scalar QosShowcase.client.wlan[0].mac.dcf packetReceivedFromPeer:count 321
 attr interpolationmode none
 attr recordingmode count
 attr title "packets received, count"
-scalar QosShowcase.client.wlan[0].mac.dcf packetReceivedFromPeer:sum(packetBytes) 1644
+scalar QosShowcase.client.wlan[0].mac.dcf packetReceivedFromPeer:sum(packetBytes) 5228
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr title "packets received, sum(packetBytes)"
-scalar QosShowcase.client.wlan[0].mac.dcf packetReceivedFromPeerUnicast:count 63
+scalar QosShowcase.client.wlan[0].mac.dcf packetReceivedFromPeerUnicast:count 307
 attr interpolationmode none
 attr recordingmode count
 attr source ieee80211Unicast(packetReceivedFromPeer)
 attr title "packets received: unicast, count"
-scalar QosShowcase.client.wlan[0].mac.dcf packetReceivedFromPeerUnicast:sum(packetBytes) 1044
+scalar QosShowcase.client.wlan[0].mac.dcf packetReceivedFromPeerUnicast:sum(packetBytes) 4460
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211Unicast(packetReceivedFromPeer)
 attr title "packets received: unicast, sum(packetBytes)"
-scalar QosShowcase.client.wlan[0].mac.dcf packetReceivedFromPeerMulticast:count 11
+scalar QosShowcase.client.wlan[0].mac.dcf packetReceivedFromPeerMulticast:count 14
 attr interpolationmode none
 attr recordingmode count
 attr source ieee80211Multicast(packetReceivedFromPeer)
 attr title "packets received: multicast, count"
-scalar QosShowcase.client.wlan[0].mac.dcf packetReceivedFromPeerMulticast:sum(packetBytes) 600
+scalar QosShowcase.client.wlan[0].mac.dcf packetReceivedFromPeerMulticast:sum(packetBytes) 768
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211Multicast(packetReceivedFromPeer)
 attr title "packets received: multicast, sum(packetBytes)"
-scalar QosShowcase.client.wlan[0].mac.dcf packetReceivedFromPeerBroadcast:count 11
+scalar QosShowcase.client.wlan[0].mac.dcf packetReceivedFromPeerBroadcast:count 14
 attr interpolationmode none
 attr recordingmode count
 attr source ieee80211Broadcast(packetReceivedFromPeer)
 attr title "packets received: broadcast, count"
-scalar QosShowcase.client.wlan[0].mac.dcf packetReceivedFromPeerBroadcast:sum(packetBytes) 600
+scalar QosShowcase.client.wlan[0].mac.dcf packetReceivedFromPeerBroadcast:sum(packetBytes) 768
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211Broadcast(packetReceivedFromPeer)
@@ -4249,30 +4347,30 @@ attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211Retry(packetReceivedFromPeer)
 attr title "packets received: with retry, sum(packetBytes)"
-scalar QosShowcase.client.wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:count 74
+scalar QosShowcase.client.wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:count 321
 attr interpolationmode none
 attr recordingmode count
 attr source ieee80211NotRetry(packetReceivedFromPeer)
 attr title "packets received: without retry, count"
-scalar QosShowcase.client.wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:sum(packetBytes) 1644
+scalar QosShowcase.client.wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:sum(packetBytes) 5228
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211NotRetry(packetReceivedFromPeer)
 attr title "packets received: without retry, sum(packetBytes)"
-scalar QosShowcase.client.wlan[0].mac.dcf packetSentToPeer:count 65
+scalar QosShowcase.client.wlan[0].mac.dcf packetSentToPeer:count 319
 attr interpolationmode none
 attr recordingmode count
 attr title "packets sent, count"
-scalar QosShowcase.client.wlan[0].mac.dcf packetSentToPeer:sum(packetBytes) 51498
+scalar QosShowcase.client.wlan[0].mac.dcf packetSentToPeer:sum(packetBytes) 287679
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr title "packets sent, sum(packetBytes)"
-scalar QosShowcase.client.wlan[0].mac.dcf packetSentToPeerUnicast:count 64
+scalar QosShowcase.client.wlan[0].mac.dcf packetSentToPeerUnicast:count 318
 attr interpolationmode none
 attr recordingmode count
 attr source ieee80211Unicast(packetSentToPeer)
 attr title "packets sent: unicast, count"
-scalar QosShowcase.client.wlan[0].mac.dcf packetSentToPeerUnicast:sum(packetBytes) 51458
+scalar QosShowcase.client.wlan[0].mac.dcf packetSentToPeerUnicast:sum(packetBytes) 287639
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211Unicast(packetSentToPeer)
@@ -4297,52 +4395,52 @@ attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211Broadcast(packetSentToPeer)
 attr title "packets sent: broadcast , sum(packetBytes)"
-scalar QosShowcase.client.wlan[0].mac.dcf packetSentToPeerWithRetry:count 1
+scalar QosShowcase.client.wlan[0].mac.dcf packetSentToPeerWithRetry:count 11
 attr interpolationmode none
 attr recordingmode count
 attr source ieee80211Retry(packetSentToPeer)
 attr title "packets sent: with retry, count"
-scalar QosShowcase.client.wlan[0].mac.dcf packetSentToPeerWithRetry:sum(packetBytes) 964
+scalar QosShowcase.client.wlan[0].mac.dcf packetSentToPeerWithRetry:sum(packetBytes) 9054
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211Retry(packetSentToPeer)
 attr title "packets sent: with retry, sum(packetBytes)"
-scalar QosShowcase.client.wlan[0].mac.dcf packetSentToPeerWithoutRetry:count 64
+scalar QosShowcase.client.wlan[0].mac.dcf packetSentToPeerWithoutRetry:count 308
 attr interpolationmode none
 attr recordingmode count
 attr source ieee80211NotRetry(packetSentToPeer)
 attr title "packets sent: without retry, count"
-scalar QosShowcase.client.wlan[0].mac.dcf packetSentToPeerWithoutRetry:sum(packetBytes) 50534
+scalar QosShowcase.client.wlan[0].mac.dcf packetSentToPeerWithoutRetry:sum(packetBytes) 278625
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source ieee80211NotRetry(packetSentToPeer)
 attr title "packets sent: without retry, sum(packetBytes)"
-scalar QosShowcase.client.wlan[0].mac.dcf packetDrop:count 322
+scalar QosShowcase.client.wlan[0].mac.dcf packetDrop:count 2311
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropped
 attr title "packet drops, count"
-scalar QosShowcase.client.wlan[0].mac.dcf packetDrop:sum(packetBytes) 239257
+scalar QosShowcase.client.wlan[0].mac.dcf packetDrop:sum(packetBytes) 1854003
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropped
 attr title "packet drops, sum(packetBytes)"
-scalar QosShowcase.client.wlan[0].mac.dcf packetDropNotAddressedToUs:count 107
+scalar QosShowcase.client.wlan[0].mac.dcf packetDropNotAddressedToUs:count 575
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropReasonIsNotAddressedToUs(packetDropped)
 attr title "packet drops: not addressed to us, count"
-scalar QosShowcase.client.wlan[0].mac.dcf packetDropNotAddressedToUs:sum(packetBytes) 43022
+scalar QosShowcase.client.wlan[0].mac.dcf packetDropNotAddressedToUs:sum(packetBytes) 264449
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropReasonIsNotAddressedToUs(packetDropped)
 attr title "packet drops: not addressed to us, sum(packetBytes)"
-scalar QosShowcase.client.wlan[0].mac.dcf packetDropQueueOverflow:count 215
+scalar QosShowcase.client.wlan[0].mac.dcf packetDropQueueOverflow:count 1736
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropReasonIsQueueOverflow(packetDropped)
 attr title "packet drops: queue overflow, count"
-scalar QosShowcase.client.wlan[0].mac.dcf packetDropQueueOverflow:sum(packetBytes) 196235
+scalar QosShowcase.client.wlan[0].mac.dcf packetDropQueueOverflow:sum(packetBytes) 1589554
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropReasonIsQueueOverflow(packetDropped)
@@ -4361,17 +4459,17 @@ scalar QosShowcase.client.wlan[0].mac.dcf linkBroken:count 0
 attr interpolationmode none
 attr recordingmode count
 attr title "link breaks, count"
-scalar QosShowcase.client.wlan[0].mac.dcf frameSequenceFinished:count 60
+scalar QosShowcase.client.wlan[0].mac.dcf frameSequenceFinished:count 314
 attr recordingmode count
 attr title "finished frame sequences, count"
 statistic QosShowcase.client.wlan[0].mac.dcf frameSequenceDuration:histogram
-field count 60
-field mean 0.00019922867993333
-field stddev 3.9784443020562e-05
+field count 314
+field mean 0.0002082354316051
+field stddev 2.4263945076916e-05
 field min 4.2e-05
 field max 0.000225
-field sum 0.011953720796
-field sqrsum 2.4749093269596e-06
+field sum 0.065385925524
+field sqrsum 1.3799941738997e-05
 attr recordingmode histogram
 attr source frameSequenceDuration(frameSequenceFinished)
 attr title "frame sequence durations"
@@ -4396,9 +4494,9 @@ bin	8e-05	1
 bin	8.5e-05	3
 bin	9e-05	0
 bin	9.5e-05	0
-bin	0.0001	0
+bin	0.0001	3
 bin	0.000105	0
-bin	0.00011	0
+bin	0.00011	2
 bin	0.000115	0
 bin	0.00012	0
 bin	0.000125	0
@@ -4410,7 +4508,7 @@ bin	0.00015	0
 bin	0.000155	0
 bin	0.00016	0
 bin	0.000165	0
-bin	0.00017	6
+bin	0.00017	22
 bin	0.000175	0
 bin	0.00018	0
 bin	0.000185	0
@@ -4418,9 +4516,9 @@ bin	0.00019	0
 bin	0.000195	0
 bin	0.0002	0
 bin	0.000205	0
-bin	0.00021	48
+bin	0.00021	273
 bin	0.000215	0
-bin	0.00022	1
+bin	0.00022	9
 bin	0.000225	0
 bin	0.00023	0
 bin	0.000235	0
@@ -4433,20 +4531,20 @@ bin	0.000265	0
 bin	0.00027	0
 bin	0.000275	0
 statistic QosShowcase.client.wlan[0].mac.dcf frameSequenceNumPackets:histogram
-field count 60
-field mean 1.9833333333333
-field stddev 0.12909944487358
+field count 314
+field mean 1.9968152866242
+field stddev 0.056433264798312
 field min 1
 field max 2
-field sum 119
-field sqrsum 237
+field sum 627
+field sqrsum 1253
 attr recordingmode histogram
 attr source frameSequenceNumPackets(frameSequenceFinished)
 attr title "frame sequences: number of packets"
 bin	-inf	0
 bin	0	0
 bin	1	1
-bin	2	59
+bin	2	313
 bin	3	0
 par QosShowcase.client.wlan[0].mac.ds typename "\"inet.linklayer.ieee80211.mac.Ds\""
 par QosShowcase.client.wlan[0].mac.ds mibModule "\"QosShowcase.client.wlan[0].mib\""
@@ -4465,27 +4563,27 @@ attr enum off,sleep,receiver,transmitter,transceiver
 par QosShowcase.client.wlan[0].mac mtu 2304B
 attr unit B
 par QosShowcase.client.wlan[0].mac qosStation false
-scalar QosShowcase.client.wlan[0].mac packetReceivedFromLower:count 181
+scalar QosShowcase.client.wlan[0].mac packetReceivedFromLower:count 896
 attr interpolationmode none
 attr recordingmode count
 attr title "packets received from lower layer, count"
-scalar QosShowcase.client.wlan[0].mac packetReceivedFromLower:sum(packetBytes) 44666
+scalar QosShowcase.client.wlan[0].mac packetReceivedFromLower:sum(packetBytes) 269677
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr title "packets received from lower layer, sum(packetBytes)"
-scalar QosShowcase.client.wlan[0].mac packetSentToLower:count 65
+scalar QosShowcase.client.wlan[0].mac packetSentToLower:count 319
 attr interpolationmode none
 attr recordingmode count
 attr title "packets sent to lower layer, count"
-scalar QosShowcase.client.wlan[0].mac packetSentToLower:sum(packetBytes) 51498
+scalar QosShowcase.client.wlan[0].mac packetSentToLower:sum(packetBytes) 287679
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr title "packets sent to lower layer, sum(packetBytes)"
-scalar QosShowcase.client.wlan[0].mac packetReceivedFromUpper:count 371
+scalar QosShowcase.client.wlan[0].mac packetReceivedFromUpper:count 2136
 attr interpolationmode none
 attr recordingmode count
 attr title "packets received from upper layer, count"
-scalar QosShowcase.client.wlan[0].mac packetReceivedFromUpper:sum(packetBytes) 330056
+scalar QosShowcase.client.wlan[0].mac packetReceivedFromUpper:sum(packetBytes) 1903121
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr title "packets received from upper layer, sum(packetBytes)"
@@ -4497,12 +4595,12 @@ scalar QosShowcase.client.wlan[0].mac packetSentToUpper:sum(packetBytes) 36
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr title "packets sent to upper layer, sum(packetBytes)"
-scalar QosShowcase.client.wlan[0].mac packetDrop:count 322
+scalar QosShowcase.client.wlan[0].mac packetDrop:count 2311
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropped
 attr title "packet drops, count"
-scalar QosShowcase.client.wlan[0].mac packetDrop:sum(packetBytes) 239257
+scalar QosShowcase.client.wlan[0].mac packetDrop:sum(packetBytes) 1854003
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropped
@@ -4517,22 +4615,22 @@ attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
 attr title "packet drops: incorrectly received, sum(packetBytes)"
-scalar QosShowcase.client.wlan[0].mac packetDropNotAddressedToUs:count 107
+scalar QosShowcase.client.wlan[0].mac packetDropNotAddressedToUs:count 575
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropReasonIsNotAddressedToUs(packetDropped)
 attr title "packet drops: not addressed to us, count"
-scalar QosShowcase.client.wlan[0].mac packetDropNotAddressedToUs:sum(packetBytes) 43022
+scalar QosShowcase.client.wlan[0].mac packetDropNotAddressedToUs:sum(packetBytes) 264449
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropReasonIsNotAddressedToUs(packetDropped)
 attr title "packet drops: not addressed to us, sum(packetBytes)"
-scalar QosShowcase.client.wlan[0].mac packetDropQueueOverflow:count 215
+scalar QosShowcase.client.wlan[0].mac packetDropQueueOverflow:count 1736
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropReasonIsQueueOverflow(packetDropped)
 attr title "packet drops: queue overflow, count"
-scalar QosShowcase.client.wlan[0].mac packetDropQueueOverflow:sum(packetBytes) 196235
+scalar QosShowcase.client.wlan[0].mac packetDropQueueOverflow:sum(packetBytes) 1589554
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropReasonIsQueueOverflow(packetDropped)
@@ -4664,13 +4762,13 @@ par QosShowcase.client.wlan[0].radio channelNumber 0
 par QosShowcase.client.wlan[0].radio crcMode "\"declared\""
 attr enum declared,computed
 statistic QosShowcase.client.wlan[0].radio minSnir:histogram
-field count 181
-field mean 8323.5619619888
-field stddev 2244.1933731656
+field count 896
+field mean 8210.6379418644
+field stddev 2285.701883876
 field min 4891.4438802596
 field max 9782.8877605193
-field sum 1506564.71512
-field sqrsum 13446537457.356
+field sum 7356731.5959105
+field sqrsum 65079327195.745
 attr recordingmode histogram
 attr source minimumSnir(packetSentToUpper)
 attr title "Min SNIR"
@@ -4687,7 +4785,7 @@ bin	4400	0
 bin	4500	0
 bin	4600	0
 bin	4700	0
-bin	4800	54
+bin	4800	288
 bin	4900	0
 bin	5000	0
 bin	5100	0
@@ -4736,7 +4834,7 @@ bin	9300	0
 bin	9400	0
 bin	9500	0
 bin	9600	0
-bin	9700	127
+bin	9700	608
 bin	9800	0
 bin	9900	0
 bin	10000	0
@@ -4752,7 +4850,7 @@ bin	10900	0
 bin	11000	0
 bin	11100	0
 statistic QosShowcase.client.wlan[0].radio packetErrorRate:histogram
-field count 181
+field count 896
 field mean 0
 field stddev 0
 field min 0
@@ -4788,7 +4886,7 @@ bin	-0.08	0
 bin	-0.06	0
 bin	-0.04	0
 bin	-0.02	0
-bin	0	181
+bin	0	896
 bin	0.02	0
 bin	0.04	0
 bin	0.06	0
@@ -4842,21 +4940,21 @@ attr title "Symbol error rate"
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar QosShowcase.client.wlan[0].radio transmissionState:count 260
+scalar QosShowcase.client.wlan[0].radio transmissionState:count 1276
 attr enum UNDEFINED,IDLE,TRANSMITTING
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source transmissionStateChanged
 attr title "Radio transmission state, count"
 attr type enum
-scalar QosShowcase.client.wlan[0].radio receptionState:count 495
+scalar QosShowcase.client.wlan[0].radio receptionState:count 2441
 attr enum UNDEFINED,IDLE,BUSY,RECEIVING
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source receptionStateChanged
 attr title "Radio reception state, count"
 attr type enum
-scalar QosShowcase.client.wlan[0].radio radioMode:count 133
+scalar QosShowcase.client.wlan[0].radio radioMode:count 641
 attr enum OFF,SLEEP,RECEIVER,TRANSMITTER,TRANSCEIVER,SWITCHING
 attr interpolationmode sample-hold
 attr recordingmode count
@@ -5188,12 +5286,12 @@ attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetReceived
 attr title "packets received, sum(packetBytes)"
-scalar QosShowcase.client.udp packetSent:count 370
+scalar QosShowcase.client.udp packetSent:count 2135
 attr interpolationmode none
 attr recordingmode count
 attr source packetSent
 attr title "packets sent, count"
-scalar QosShowcase.client.udp packetSent:sum(packetBytes) 319660
+scalar QosShowcase.client.udp packetSent:sum(packetBytes) 1843305
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetSent
@@ -5258,7 +5356,7 @@ par QosShowcase.client.app[0] messageLength 900B
 attr unit B
 par QosShowcase.client.app[0] startTime 1s
 attr unit s
-par QosShowcase.client.app[0] stopTime 6s
+par QosShowcase.client.app[0] stopTime 100s
 attr unit s
 par QosShowcase.client.app[0] sendInterval "normal(300us, 10us)"
 attr unit s
@@ -5273,7 +5371,7 @@ par QosShowcase.client.app[0] stopOperationExtraTime -1s
 attr unit s
 par QosShowcase.client.app[0] stopOperationTimeout 2s
 attr unit s
-scalar QosShowcase.client.app[0] "packets sent" 147
+scalar QosShowcase.client.app[0] "packets sent" 843
 scalar QosShowcase.client.app[0] "packets received" 0
 scalar QosShowcase.client.app[0] packetReceived:count 0
 attr interpolationmode none
@@ -5298,12 +5396,12 @@ attr recordingmode stats
 attr source dataAge(packetReceived)
 attr title "received packet lifetime"
 attr unit s
-scalar QosShowcase.client.app[0] packetSent:count 147
+scalar QosShowcase.client.app[0] packetSent:count 843
 attr interpolationmode none
 attr recordingmode count
 attr source packetSent
 attr title "packets sent, count"
-scalar QosShowcase.client.app[0] packetSent:sum(packetBytes) 132300
+scalar QosShowcase.client.app[0] packetSent:sum(packetBytes) 758700
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetSent
@@ -5320,7 +5418,7 @@ par QosShowcase.client.app[1] messageLength 900B
 attr unit B
 par QosShowcase.client.app[1] startTime 1.00006s
 attr unit s
-par QosShowcase.client.app[1] stopTime 6s
+par QosShowcase.client.app[1] stopTime 100s
 attr unit s
 par QosShowcase.client.app[1] sendInterval "normal(250us, 10us)"
 attr unit s
@@ -5335,7 +5433,7 @@ par QosShowcase.client.app[1] stopOperationExtraTime -1s
 attr unit s
 par QosShowcase.client.app[1] stopOperationTimeout 2s
 attr unit s
-scalar QosShowcase.client.app[1] "packets sent" 176
+scalar QosShowcase.client.app[1] "packets sent" 1014
 scalar QosShowcase.client.app[1] "packets received" 0
 scalar QosShowcase.client.app[1] packetReceived:count 0
 attr interpolationmode none
@@ -5360,12 +5458,12 @@ attr recordingmode stats
 attr source dataAge(packetReceived)
 attr title "received packet lifetime"
 attr unit s
-scalar QosShowcase.client.app[1] packetSent:count 176
+scalar QosShowcase.client.app[1] packetSent:count 1014
 attr interpolationmode none
 attr recordingmode count
 attr source packetSent
 attr title "packets sent, count"
-scalar QosShowcase.client.app[1] packetSent:sum(packetBytes) 158400
+scalar QosShowcase.client.app[1] packetSent:sum(packetBytes) 912600
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetSent
@@ -5382,7 +5480,7 @@ par QosShowcase.client.app[2] messageLength 600B
 attr unit B
 par QosShowcase.client.app[2] startTime 1.0005s
 attr unit s
-par QosShowcase.client.app[2] stopTime 6s
+par QosShowcase.client.app[2] stopTime 100s
 attr unit s
 par QosShowcase.client.app[2] sendInterval "normal(1ms, 10us)"
 attr unit s
@@ -5397,7 +5495,7 @@ par QosShowcase.client.app[2] stopOperationExtraTime -1s
 attr unit s
 par QosShowcase.client.app[2] stopOperationTimeout 2s
 attr unit s
-scalar QosShowcase.client.app[2] "packets sent" 44
+scalar QosShowcase.client.app[2] "packets sent" 253
 scalar QosShowcase.client.app[2] "packets received" 0
 scalar QosShowcase.client.app[2] packetReceived:count 0
 attr interpolationmode none
@@ -5422,12 +5520,12 @@ attr recordingmode stats
 attr source dataAge(packetReceived)
 attr title "received packet lifetime"
 attr unit s
-scalar QosShowcase.client.app[2] packetSent:count 44
+scalar QosShowcase.client.app[2] packetSent:count 253
 attr interpolationmode none
 attr recordingmode count
 attr source packetSent
 attr title "packets sent, count"
-scalar QosShowcase.client.app[2] packetSent:sum(packetBytes) 26400
+scalar QosShowcase.client.app[2] packetSent:sum(packetBytes) 151800
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetSent
@@ -5444,7 +5542,7 @@ par QosShowcase.client.app[3] messageLength 125B
 attr unit B
 par QosShowcase.client.app[3] startTime 1.0075s
 attr unit s
-par QosShowcase.client.app[3] stopTime 6s
+par QosShowcase.client.app[3] stopTime 100s
 attr unit s
 par QosShowcase.client.app[3] sendInterval "normal(10ms, 10us)"
 attr unit s
@@ -5459,7 +5557,7 @@ par QosShowcase.client.app[3] stopOperationExtraTime -1s
 attr unit s
 par QosShowcase.client.app[3] stopOperationTimeout 2s
 attr unit s
-scalar QosShowcase.client.app[3] "packets sent" 4
+scalar QosShowcase.client.app[3] "packets sent" 25
 scalar QosShowcase.client.app[3] "packets received" 0
 scalar QosShowcase.client.app[3] packetReceived:count 0
 attr interpolationmode none
@@ -5484,12 +5582,12 @@ attr recordingmode stats
 attr source dataAge(packetReceived)
 attr title "received packet lifetime"
 attr unit s
-scalar QosShowcase.client.app[3] packetSent:count 4
+scalar QosShowcase.client.app[3] packetSent:count 25
 attr interpolationmode none
 attr recordingmode count
 attr source packetSent
 attr title "packets sent, count"
-scalar QosShowcase.client.app[3] packetSent:sum(packetBytes) 500
+scalar QosShowcase.client.app[3] packetSent:sum(packetBytes) 3125
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetSent
@@ -5534,7 +5632,7 @@ attr unit mps
 par QosShowcase.radioMedium.propagation ignoreMovementDuringTransmission true
 par QosShowcase.radioMedium.propagation ignoreMovementDuringPropagation true
 par QosShowcase.radioMedium.propagation ignoreMovementDuringReception true
-scalar QosShowcase.radioMedium.propagation "Arrival computation count" 496
+scalar QosShowcase.radioMedium.propagation "Arrival computation count" 2454
 par QosShowcase.radioMedium.analogModel typename "\"inet.physicallayer.wireless.common.analogmodel.scalar.ScalarMediumAnalogModel\""
 par QosShowcase.radioMedium.analogModel ignorePartialInterference false
 par QosShowcase.radioMedium.backgroundNoise typename "\"inet.physicallayer.wireless.common.backgroundnoise.IsotropicScalarBackgroundNoise\""
@@ -5580,13 +5678,13 @@ par QosShowcase.radioMedium recordTransmissionLog false
 par QosShowcase.radioMedium recordReceptionLog false
 par QosShowcase.radioMedium sameTransmissionStartTimeCheck "\"error\""
 attr enum ignore,warning,error
-scalar QosShowcase.radioMedium "transmission count" 248
-scalar QosShowcase.radioMedium "signal send count" 496
-scalar QosShowcase.radioMedium "reception computation count" 496
-scalar QosShowcase.radioMedium "interference computation count" 1732
-scalar QosShowcase.radioMedium "reception decision computation count" 491
-scalar QosShowcase.radioMedium "listening decision computation count" 747
-scalar QosShowcase.radioMedium "reception cache hit" 85.639837869137
+scalar QosShowcase.radioMedium "transmission count" 1227
+scalar QosShowcase.radioMedium "signal send count" 2454
+scalar QosShowcase.radioMedium "reception computation count" 2454
+scalar QosShowcase.radioMedium "interference computation count" 8529
+scalar QosShowcase.radioMedium "reception decision computation count" 2419
+scalar QosShowcase.radioMedium "listening decision computation count" 3678
+scalar QosShowcase.radioMedium "reception cache hit" 85.610413979125
 attr unit %
 scalar QosShowcase.radioMedium "interference cache hit" 66.666666666667
 attr unit %
